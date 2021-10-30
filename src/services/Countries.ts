@@ -1,4 +1,17 @@
+import { stringFilter } from "utils"
 
+
+export   function getCountries(filterTerm?:string) {
+    return new Promise<string[]>((resolve, reject) => {
+       try {
+        if(filterTerm)  resolve(countriesData.filter((country)=>stringFilter(country,filterTerm)))
+        else resolve(countriesData)
+
+       } catch (error) {
+           reject(error)
+       }
+    })
+}
 const countriesData=[
     "Afghanistan",
     "Aland Islands",
@@ -253,14 +266,3 @@ const countriesData=[
     "Zambia",
     "Zimbabwe"
 ]
-export   function getCountries(filterTerm?:string) {
-    return new Promise<string[]>((resolve, reject) => {
-       try {
-        if(filterTerm)  resolve(countriesData.filter((country)=>country.includes(filterTerm)))
-        else resolve(countriesData)
-
-       } catch (error) {
-           reject(error)
-       }
-    })
-}
